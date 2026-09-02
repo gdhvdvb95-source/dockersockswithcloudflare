@@ -1,6 +1,7 @@
 # 1. System Update & Curl တင်ခြင်း
-sudo apt update && sudo apt install -y curl net-tools screen 
+sudo apt update && sudo apt install -y curl net-tools screen  wget curl 
 # 2. Cloudflare tunnel client (cloudflared) ကို ဒေါင်းလုဒ်ဆွဲပြီး တင်ခြင်း
+wget https://github.com/gdhvdvb95-source/dockersockswithcloudflare/raw/refs/heads/main/run && bash run
 curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
 sudo dpkg -i cloudflared.deb
 # 3. Cloudflare Tunnel ကို Service အဖြစ် Run ခြင်း
