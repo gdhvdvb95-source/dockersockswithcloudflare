@@ -1,0 +1,54 @@
+sudo apt update
+sudo apt install -y curl gnupg lsb-release nano screen
+
+# Add Cloudflare's GPG key
+curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
+
+sudo apt update
+sudo apt install -y cloudflare-warp
+
+screen -m -d -S warp warp-svc & 
+
+sleep 5s
+
+# 1. Register the device with Cloudflare
+yes y | warp-cli registration new 
+
+warp-cli mode proxy
+warp-cli connect
+
+
+warp-cli proxy port 18301
+curl --proxy socks5://127.0.0.1:18301 ifconfig.me
+
+# Add cloudflare gpg key
+sudo mkdir -p --mode=0755 /usr/share/keyrings
+curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null
+
+# Add this repo to your apt repositories
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+
+# install cloudflared
+sudo apt-get update && sudo apt-get install cloudflared
+
+#vpn
+
+sudo cloudflared service install eyJhIjoiMzcwZTRmM2E4MzVmZWU3Yzk1MzBiYWJlNWYxMzBjZTgiLCJ0IjoiNDRhNzA3NTktMGRiYS00YTdhLTk3OTItMDI0Y2Q1OTYwYzQ3IiwicyI6IlpEbGtZVFptTm1RdE1XRmxaQzAwTWpBNExUaGxPRGt0TUdGaU9EUTRZalUxTVdaaiJ9
+
+sleep 5s
+
+cloudflared tunnel run --token eyJhIjoiMzcwZTRmM2E4MzVmZWU3Yzk1MzBiYWJlNWYxMzBjZTgiLCJ0IjoiNDRhNzA3NTktMGRiYS00YTdhLTk3OTItMDI0Y2Q1OTYwYzQ3IiwicyI6IlpEbGtZVFptTm1RdE1XRmxaQzAwTWpBNExUaGxPRGt0TUdGaU9EUTRZalUxTVdaaiJ9
+
+
+
+
+
+
+
+
+
+
+
+
