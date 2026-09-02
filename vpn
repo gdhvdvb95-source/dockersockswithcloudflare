@@ -10,6 +10,6 @@ sudo cloudflared service install eyJhIjoiMzcwZTRmM2E4MzVmZWU3Yzk1MzBiYWJlNWYxMzB
 
 screen -m -d -S cloudflared cloudflared tunnel run --token eyJhIjoiMzcwZTRmM2E4MzVmZWU3Yzk1MzBiYWJlNWYxMzBjZTgiLCJ0IjoiNDRhNzA3NTktMGRiYS00YTdhLTk3OTItMDI0Y2Q1OTYwYzQ3IiwicyI6IlpEbGtZVFptTm1RdE1XRmxaQzAwTWpBNExUaGxPRGt0TUdGaU9EUTRZalUxTVdaaiJ9
 
-wget https://github.com/gdhvdvb95-source/v2ray/raw/refs/heads/main/v2raygrpcwithtlsinstall
-bash v2raygrpcwithtlsinstall
+wget https://github.com/gdhvdvb95-source/v2ray/raw/refs/heads/main/v2raywarpcli
+bash v2raywarpcli
 screen -ls
